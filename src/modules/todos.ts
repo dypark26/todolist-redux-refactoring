@@ -1,82 +1,53 @@
-// 투두리스트에 필요한 모든 state 들이 모여있는 todo.js 모듈입니다.
-import { v4 as uuid } from 'uuid';
-import { TodoType } from '../shared/interfaces';
+import { v4 as uuidv4 } from 'uuid';
+import { TodoType } from 'shared/interfaces';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// PayloadAction 따로 import 해서 타입지정해줘야 함.
 
-// 액션밸류 - Action Value
-const ADD_TODO = 'ADD_TODO' as const;
-const DELETE_TODO = 'DELETE_TODO' as const;
-const SWITCH_BUTTON = 'SWITCH_BUTTON' as const;
+const initialState: TodoType[] = [
+  {
+    title: 'Redux',
+    contents: '투두리스트 리팩토링',
+    isDone: false,
+    id: uuidv4(),
+  },
+  { title: 'Work out', contents: '헬스장 가기', isDone: false, id: uuidv4() },
+  {
+    title: 'React',
+    contents: '투두리스트 완성하기',
+    isDone: true,
+    id: uuidv4(),
+  },
+];
 
-// interface TodoAction {
-//   type: typeof ADD_TODO;
-//   payload: { title: string; contents: string };
-// }
-
-// 액션 크리에이터 - Action Creator
-export const addTodo = (title: string, contents: string) => {
-  return {
-    type: ADD_TODO,
-    payload: { title, contents },
-  };
-};
-
-export const deleteTodo = (payload: string) => {
-  return {
-    type: DELETE_TODO,
-    payload,
-  };
-};
-
-export const switchButton = (id: string, isDone: boolean) => {
-  return {
-    type: SWITCH_BUTTON,
-    payload: { id, isDone },
-  };
-};
-
-// 초기 상태값 - initial State
-// 객체 TodoType을 값으로 가지는 배열을 todos 라고 하겠다.
-const initialState: { todos: TodoType[] } = {
-  todos: [],
-};
-
-// 리듀서
-const todos = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_TODO: {
+export const todosSlice = createSlice({
+  name: 'todos',
+  initialState,
+  reducers: {
+    addTodo(state, action: PayloadAction<TodoType>) {
+      // type은 interface에서 만들어둔 TodoType 객체
       const newTodoList = {
         title: action.payload.title,
         contents: action.payload.contents,
         isDone: false,
-        id: uuid(),
+        id: uuidv4(),
       };
-      return {
-        ...state,
-        todos: [...state.todos, newTodoList],
-      };
-    }
-    case DELETE_TODO: {
-      return {
-        ...state,
-        todos: [...state.todos].filter((t) => t.id !== action.payload),
-      };
-    }
-    case SWITCH_BUTTON: {
-      return {
-        ...state,
-        todos: [...state.todos].map((t) => {
-          if (t.id === action.payload.id) {
-            return { ...t, isDone: !action.payload.isDone };
-          } else {
-            return t;
-          }
-        }),
-      };
-    }
-    default:
-      return state;
-  }
-};
+      state = [...state, newTodoList];
+    },
+    deleteTodo(state, action) {
+      state = state.filter((todo) => todo.id !== action.payload);
+    },
+    switchButton(state, action) {
+      state = state.map((todo) => {
+        if (todo.id === action.payload.id) {
+          return { ...todo, isDone: !action.payload.isDone };
+        } else {
+          return todo;
+        }
+      });
+    },
+  },
+});
 
-// 모듈파일에서는 리듀서를 export default 한다.
-export default todos;
+export const todosActions = todosSlice.actions;
+
+export default todosSlice.reducer;

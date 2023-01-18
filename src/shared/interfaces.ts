@@ -1,10 +1,10 @@
 import React from 'react';
 
 export interface TodoType {
-  title: string;
-  contents: string;
-  isDone: boolean;
-  id: string;
+  title?: string;
+  contents?: string;
+  isDone?: boolean;
+  id?: string;
 }
 
 export interface HeaderProps {

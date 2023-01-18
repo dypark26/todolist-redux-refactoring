@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../modules/todos';
+import { todosActions } from 'modules/todos';
 import styled from 'styled-components';
 
 const Input: React.FC = () => {
@@ -25,7 +25,7 @@ const Input: React.FC = () => {
       alert('내용을 입력하세요!');
       return;
     }
-    dispatch(addTodo(title, contents));
+    dispatch(todosActions.addTodo({ title, contents }));
     setTitle('');
     setContents('');
   };

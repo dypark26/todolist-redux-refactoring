@@ -4,20 +4,25 @@ import { Reset } from 'styled-reset';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from 'config/configStore';
+import { TodoType } from 'shared/interfaces';
 
 const DetailPage: React.FC = () => {
-  const todos = useSelector((state) => state.todos.todos);
+  const todos = useSelector((state: RootState) => state.todos);
 
   const { id } = useParams();
   const navigate = useNavigate();
   const todo = todos.find((todo) => todo.id === id);
+
+  console.log('todo', todo);
 
   return (
     <BackGround>
       <Reset />
       <TodoDetailWrapper>
         <DetailHeader>
-          <p>{todo.id}</p>
+          {/* 처음에는 state 값이 없어서 undefined 일 수 있다? */}
+          <p>{todo?.id}</p>
           <BackButton
             onClick={() => {
               navigate('/');
@@ -27,8 +32,8 @@ const DetailPage: React.FC = () => {
           </BackButton>
         </DetailHeader>
         <TodoContentWrapper>
-          <div>{todo.title}</div>
-          <p>{todo.contents}</p>
+          <div>{todo?.title}</div>
+          <p>{todo?.contents}</p>
         </TodoContentWrapper>
       </TodoDetailWrapper>
     </BackGround>

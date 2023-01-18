@@ -1,19 +1,19 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteTodo, switchButton } from '../modules/todos';
-import { TodoProps } from 'shared/interfaces';
+import { todosActions } from 'modules/todos';
+import { TodoProps, TodoType } from 'shared/interfaces';
 
-const Todo: React.FC<TodoProps> = ({ todo }) => {
+const Todo: React.FC<TodoProps> = ({ todo }: { todo: TodoType }) => {
   const dispatch = useDispatch();
 
   const handleDeleteButtonOnclick = () => {
-    dispatch(deleteTodo(todo.id));
+    dispatch(todosActions.deleteTodo(todo.id));
   };
 
   const switchButtonOnClick = () => {
-    dispatch(switchButton(todo.id, todo.isDone));
+    dispatch(todosActions.switchButton(todo.id));
   };
 
   return (

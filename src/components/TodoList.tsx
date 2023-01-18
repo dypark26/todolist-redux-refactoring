@@ -2,10 +2,12 @@ import React from 'react';
 import Todo from './Todo';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { TodoListProps } from 'shared/interfaces';
+import { TodoListProps, TodoType } from 'shared/interfaces';
+import { RootState } from 'config/configStore';
 
 const TodoList: React.FC<TodoListProps> = ({ isActive }) => {
-  const todos = useSelector((state) => state.todos.todos);
+  const todos = useSelector((state: RootState) => state.todos);
+  console.log('todos', todos);
 
   return (
     <Body>
