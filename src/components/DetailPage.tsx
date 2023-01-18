@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { Reset } from "styled-reset";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import { Reset } from 'styled-reset';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function DetailPage() {
+const DetailPage: React.FC = () => {
   const todos = useSelector((state) => state.todos.todos);
 
   const { id } = useParams();
@@ -20,7 +20,7 @@ function DetailPage() {
           <p>{todo.id}</p>
           <BackButton
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
           >
             이전으로
@@ -33,10 +33,10 @@ function DetailPage() {
       </TodoDetailWrapper>
     </BackGround>
   );
-}
+};
 
 const BackGround = styled.div`
-  background-color: rgb(36, 36, 36);
+  background-color: #242424;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +53,7 @@ const TodoDetailWrapper = styled.div`
   width: 50%;
   height: 50%;
   border: none;
-  background-color: rgb(239, 239, 239);
+  background-color: #efefef;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@ const DetailHeader = styled.div`
   p {
     font-size: 16px;
     font-weight: 700;
-    color: rgb(33, 174, 255);
+    color: #21aeff;
   }
 `;
 

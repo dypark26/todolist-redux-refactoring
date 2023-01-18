@@ -1,14 +1,15 @@
-import React from "react";
-import Todo from "./Todo";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
+import React from 'react';
+import Todo from './Todo';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { TodoListProps } from 'shared/interfaces';
 
-function TodoList({ isActive }) {
+const TodoList: React.FC<TodoListProps> = ({ isActive }) => {
   const todos = useSelector((state) => state.todos.todos);
 
   return (
     <Body>
-      <Title>{isActive ? "Working..🔥" : "Done..!🎉"}</Title>
+      <Title>{isActive ? 'Working..🔥' : 'Done..!🎉'}</Title>
       <TodoListWrapper>
         {todos
           .filter((todo) => !todo.isDone === isActive)
@@ -18,7 +19,7 @@ function TodoList({ isActive }) {
       </TodoListWrapper>
     </Body>
   );
-}
+};
 
 const TodoListWrapper = styled.div`
   width: 100%;
@@ -31,7 +32,7 @@ const TodoListWrapper = styled.div`
 
 const Title = styled.div`
   font-size: 30px;
-  color: rgb(236, 236, 236);
+  color: #ececec;
   margin: 20px 0px;
 `;
 

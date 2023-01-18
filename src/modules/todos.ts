@@ -1,27 +1,33 @@
 // 투두리스트에 필요한 모든 state 들이 모여있는 todo.js 모듈입니다.
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuid } from 'uuid';
+import { TodoType } from '../shared/interfaces';
 
 // 액션밸류 - Action Value
-const ADD_TODO = "ADD_TODO";
-const DELETE_TODO = "DELETE_TODO";
-const SWITCH_BUTTON = "SWITCH_BUTTON";
+const ADD_TODO = 'ADD_TODO' as const;
+const DELETE_TODO = 'DELETE_TODO' as const;
+const SWITCH_BUTTON = 'SWITCH_BUTTON' as const;
+
+// interface TodoAction {
+//   type: typeof ADD_TODO;
+//   payload: { title: string; contents: string };
+// }
 
 // 액션 크리에이터 - Action Creator
-export const addTodo = (title, contents) => {
+export const addTodo = (title: string, contents: string) => {
   return {
     type: ADD_TODO,
     payload: { title, contents },
   };
 };
 
-export const deleteTodo = (payload) => {
+export const deleteTodo = (payload: string) => {
   return {
     type: DELETE_TODO,
     payload,
   };
 };
 
-export const switchButton = (id, isDone) => {
+export const switchButton = (id: string, isDone: boolean) => {
   return {
     type: SWITCH_BUTTON,
     payload: { id, isDone },
@@ -29,22 +35,9 @@ export const switchButton = (id, isDone) => {
 };
 
 // 초기 상태값 - initial State
-const initialState = {
-  todos: [
-    {
-      title: "Redux",
-      contents: "투두리스트 리팩토링",
-      isDone: false,
-      id: uuidv4(),
-    },
-    { title: "Work out", contents: "헬스장 가기", isDone: false, id: uuidv4() },
-    {
-      title: "React",
-      contents: "투두리스트 완성하기",
-      isDone: true,
-      id: uuidv4(),
-    },
-  ],
+// 객체 TodoType을 값으로 가지는 배열을 todos 라고 하겠다.
+const initialState: { todos: TodoType[] } = {
+  todos: [],
 };
 
 // 리듀서
@@ -55,7 +48,7 @@ const todos = (state = initialState, action) => {
         title: action.payload.title,
         contents: action.payload.contents,
         isDone: false,
-        id: uuidv4(),
+        id: uuid(),
       };
       return {
         ...state,

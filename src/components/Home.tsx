@@ -1,13 +1,13 @@
 // src/App.js
 
-import React from "react";
-import Header from "./Header";
-import Input from "./Input";
-import TodoList from "./TodoList";
-import styled from "styled-components";
-import { Reset } from "styled-reset";
+import React, { FC } from 'react';
+import Header from './Header';
+import Input from './Input';
+import TodoList from './TodoList';
+import styled from 'styled-components';
+import { Reset } from 'styled-reset';
 
-const Home = () => {
+const Home: FC = () => {
   return (
     <BackGround>
       <Reset />

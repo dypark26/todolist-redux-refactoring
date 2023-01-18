@@ -1,25 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTodo } from "../modules/todos";
-import styled from "styled-components";
+import React, { ChangeEvent, FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../modules/todos';
+import styled from 'styled-components';
 
-function Input() {
+const Input: React.FC = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
+  const [title, setTitle] = useState<string>('');
+  const [contents, setContents] = useState<string>('');
 
-  const handleOnSubmit = (event) => {
+  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>): void => {
+    setTitle(e.target.value);
+  };
+  const handleChangeContents = (e: ChangeEvent<HTMLInputElement>): void => {
+    setTitle(e.target.value);
+  };
+
+  // onSubmit event: React에서 이벤트 태그랑 return 값에서 해당하는 요소를 찾아서 넣어주기
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (title === "") {
-      alert("제목을 입력하세요!");
+    if (title === '') {
+      alert('제목을 입력하세요!');
       return;
-    } else if (contents === "") {
-      alert("내용을 입력하세요!");
+    } else if (contents === '') {
+      alert('내용을 입력하세요!');
       return;
     }
     dispatch(addTodo(title, contents));
-    setTitle("");
-    setContents("");
+    setTitle('');
+    setContents('');
   };
 
   return (
@@ -28,22 +36,22 @@ function Input() {
         <label>제목</label>
         <InputButton
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={handleChangeTitle}
           type="text"
           placeholder="어떤것을 해볼까요?"
         />
         <label>내용</label>
         <InputButton
           value={contents}
-          onChange={(e) => setContents(e.target.value)}
+          onChange={handleChangeContents}
           type="text"
           placeholder="설명을 적어주세요!!"
         />
-        <SubmitButton backgroundColor="rgb(33, 174, 255)">추가</SubmitButton>
+        <SubmitButton backgroundColor="#21aeff">추가</SubmitButton>
       </InputWrapper>
     </form>
   );
-}
+};
 
 const InputWrapper = styled.div`
   display: flex;
@@ -52,13 +60,13 @@ const InputWrapper = styled.div`
   gap: 20px;
   padding: 20px;
   background-color: black;
-  color: rgb(236, 236, 236);
+  color: #ececec;
 `;
 
 const InputButton = styled.input`
   border: none;
-  background-color: rgb(57, 57, 57);
-  color: rgb(236, 236, 236);
+  background-color: #393939;
+  color: #ececec;
   border-radius: 10px;
   padding: 6px 10px 6px;
   width: 200px;
@@ -67,8 +75,7 @@ const InputButton = styled.input`
   font-weight: 500;
 `;
 
-const SubmitButton = styled.button`
-  backgroundcolor: color;
+const SubmitButton = styled.button<{ backgroundColor: string }>`
   color: white;
   background-color: ${(props) => props.backgroundColor};
   border-radius: 20px;
