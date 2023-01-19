@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { TodoListProps, TodoType } from 'shared/interfaces';
+import { TodoListProps } from 'shared/interfaces';
 import { RootState } from 'config/configStore';
 
 const TodoList: React.FC<TodoListProps> = ({ isActive }) => {

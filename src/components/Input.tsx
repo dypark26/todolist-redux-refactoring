@@ -12,7 +12,7 @@ const Input: React.FC = () => {
     setTitle(e.target.value);
   };
   const handleChangeContents = (e: ChangeEvent<HTMLInputElement>): void => {
-    setTitle(e.target.value);
+    setContents(e.target.value);
   };
 
   // onSubmit event: React에서 이벤트 태그랑 return 값에서 해당하는 요소를 찾아서 넣어주기

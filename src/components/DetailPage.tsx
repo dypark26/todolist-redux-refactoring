@@ -10,6 +10,8 @@ import { TodoType } from 'shared/interfaces';
 const DetailPage: React.FC = () => {
   const todos = useSelector((state: RootState) => state.todos);
 
+  console.log('todos', todos);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const todo = todos.find((todo) => todo.id === id);

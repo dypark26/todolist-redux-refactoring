@@ -38,7 +38,7 @@ export const todosSlice = createSlice({
     },
     switchButton(state, action) {
       state = state.map((todo) => {
-        if (todo.id === action.payload.id) {
+        if (todo.id === action.payload) {
           return { ...todo, isDone: !action.payload.isDone };
         } else {
           return todo;

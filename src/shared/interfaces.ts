@@ -16,5 +16,5 @@ export interface TodoListProps {
 }
 
 export interface TodoProps {
-  todo: { id: string; isDone: boolean; title: string; contents: string };
+  todo: { title?: string; contents?: string; isDone?: boolean; id?: string };
 }
