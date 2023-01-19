@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { todosActions } from 'modules/todos';
 import { TodoProps, TodoType } from 'shared/interfaces';
 
-const Todo: React.FC<TodoProps> = ({ todo }: { todo: TodoType }) => {
+// ?{ todo }: { todo: TodoType }
+const Todo: React.FC<TodoProps> = ({ todo }) => {
   const dispatch = useDispatch();
 
   const handleDeleteButtonOnclick = () => {
-    dispatch(todosActions.deleteTodo(todo.id));
+    dispatch(todosActions.deleteTodo({ id: todo.id }));
   };
 
   const switchButtonOnClick = () => {

@@ -1,10 +1,21 @@
 import React from 'react';
 
 export interface TodoType {
-  title?: string;
-  contents?: string;
-  isDone?: boolean;
-  id?: string;
+  title: string;
+  contents: string;
+  isDone: boolean;
+  id: string;
+}
+export interface AddTodo {
+  title: string;
+  contents: string;
+}
+export interface DeleteTodo {
+  id: string;
+}
+export interface SwitchTodo {
+  isDone: boolean;
+  id: string;
 }
 
 export interface HeaderProps {
@@ -16,5 +27,5 @@ export interface TodoListProps {
 }
 
 export interface TodoProps {
-  todo: { title?: string; contents?: string; isDone?: boolean; id?: string };
+  todo: { title: string; contents: string; isDone: boolean; id: string };
 }
