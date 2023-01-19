@@ -13,7 +13,8 @@ const Todo: React.FC<TodoProps> = ({ todo }: { todo: TodoType }) => {
   };
 
   const switchButtonOnClick = () => {
-    dispatch(todosActions.switchButton(todo.id));
+    // payload 객체니까 키밸류로 보내줘야지!!! 바보.
+    dispatch(todosActions.switchButton({ id: todo.id, isDone: todo.isDone }));
   };
 
   return (

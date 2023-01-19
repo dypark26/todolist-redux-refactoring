@@ -9,8 +9,9 @@ const store = configureStore({
 
 export default store;
 
-// reducer의 타입을 지정해주어야 함.
 // export type RootState = ReturnType<typeof configureStore>;
+// reducer의 타입을 지정해주어야 함.
+// typeof 가 configureStore가 아니라 store.getState
 export type RootState = ReturnType<typeof store.getState>;
 
 // import { combineReducers, createStore } from 'redux';
